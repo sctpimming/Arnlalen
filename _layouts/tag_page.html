@@ -1,16 +1,24 @@
 ---
 layout: default
 ---
-<h1 class="post-title">{{ page.tag }}</h1>
+<h1>Posts Tagged with "{{ page.tag }}"</h1>
 
 <ul class="post-list">
   {% for post in site.tags[page.tag] %}
   <li>
-    {% assign date_format = site.minima.date_format | default: "%b %-d, %Y" %}
-    <span class="post-meta">{{ post.date | date: date_format }}</span>
-    <h3>
-      <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+    <h3 class="post-title">
+      <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
     </h3>
+    <p class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</p>
   </li>
   {% endfor %}
 </ul>
+
+<hr>
+
+<div class="all-tags-list">
+  <h3>View all tags:</h3>
+  {% for tag in site.tags %}
+  <a href="{{ '/tags/' | relative_url }}{{ tag | first | slugify }}/">{{ tag | first }} ({{ tag | last | size }})</a>
+  {% endfor %}
+</div>
